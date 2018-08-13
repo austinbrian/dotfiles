@@ -32,3 +32,6 @@ if [ -f '/Users/austinbrian/Documents/google-cloud-sdk/completion.bash.inc' ]; t
 export PATH="/Users/austinbrian/anaconda3/bin:$PATH"
 
 source  ~/.bashrc
+
+# added by Anaconda3 5.2.0 installer
+export PATH="/Users/austinbrian/anaconda3/bin:$PATH"
