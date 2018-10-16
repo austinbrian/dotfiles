@@ -62,7 +62,9 @@ set number relativenumber
 set foldmethod=indent   "fold based on indent
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
-set foldlevel=1         "this is just what i use
+set foldlevel=99
+
+nnoremap <space> za
 
 " in insert mode, relative numbers are turned off, leaving just absolute
 " same when you focus on a different buffer
@@ -115,6 +117,7 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 endif
 
+  " add proper Pep8 indentation for python files
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 " md is markdown

@@ -16,6 +16,8 @@ if (&t_Co == 256 || has('gui_running'))
   endif
 endif
 
+call togglebg#map("<F5>")
+
 " Disambiguate ,a & ,t from the Align plugin, making them fast again.
 "
 " This section is here to prevent AlignMaps from adding a bunch of mappings
@@ -31,3 +33,22 @@ function! s:RemoveConflictingAlignMaps()
 endfunction
 command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
 silent! autocmd VimEnter * RemoveConflictingAlignMaps
+
+" Other stuff
+" add proper Pep8 indentation for python files
+au BufRead,BufNewFile *py,*pyw,*.c,*.h set tabstop=4
+
+"spaces for indents
+au BufRead,BufNewFile *.py,*pyw set shiftwidth=4 softtabstop=4
+  " for additional filetypes
+au BufNewFile,BufRead *.js, *.html, *.css setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+  " flag unnecessary whitespace
+highlight BadWhitespace ctermbg=red guibg=darkred
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
+
+" Vim tabs
+map <Leader>n <plug>NERDTreeTabsToggle<CR>
+
+let g:ycm_python_binary_path = 'python3'
