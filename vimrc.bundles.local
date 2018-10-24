@@ -1,4 +1,4 @@
   " For adding in additional non-Maximum Awesome plugins
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
