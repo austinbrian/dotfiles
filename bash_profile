@@ -17,6 +17,7 @@ alias bda='cd ~/OneDrive/Documents/BDA'
 alias sp='spotify pause'
 alias py2='/usr/local/bin/python2'
 alias py3='/usr/local/bin/python3'
+alias tree='tree -I __pycache__'
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/austinbrian/Documents/google-cloud-sdk/path.bash.inc' ]; then source '/Users/austinbrian/Documents/google-cloud-sdk/path.bash.inc'; fi
@@ -33,5 +34,3 @@ export PATH="/Users/austinbrian/anaconda3/bin:$PATH"
 
 source  ~/.bashrc
 
-# added by Anaconda3 5.2.0 installer
-export PATH="/Users/austinbrian/anaconda3/bin:$PATH"
