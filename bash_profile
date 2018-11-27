@@ -18,20 +18,25 @@ alias sp='spotify pause'
 alias py2='/usr/local/bin/python2'
 alias py3='/usr/local/bin/python3'
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/austinbrian/Documents/google-cloud-sdk/path.bash.inc' ]; then source '/Users/austinbrian/Documents/google-cloud-sdk/path.bash.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/austinbrian/Documents/google-cloud-sdk/completion.bash.inc' ]; then source '/Users/austinbrian/Documents/google-cloud-sdk/completion.bash.inc'; fi
-
-# export NVM_DIR="/Users/austinbrian/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-
-# added by Anaconda3 installer
-export PATH="/Users/austinbrian/anaconda3/bin:$PATH"
-
 source  ~/.bashrc
 
 # added by Anaconda3 5.2.0 installer
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"  
 export PATH="/Users/austinbrian/anaconda3/bin:$PATH"
+
+# Convenience definitions to activate virtualenvs and list them
+actenv() {
+	source ~/envs/$1/bin/activate
+}
+
+lsenv() {
+	ls $1 ~/envs/
+}
+
+mkenv() {
+	python -m venv ~/envs/$1
+}
+
+rmenv() {
+	rm -rf ~/envs/$1
+}
