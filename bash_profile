@@ -20,9 +20,9 @@ alias py3='/usr/local/bin/python3'
 
 source  ~/.bashrc
 
-# added by Anaconda3 5.2.0 installer
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"  
 export PATH="/Users/austinbrian/anaconda3/bin:$PATH"
+export PATH="$PATH:~/miniconda3/bin"
 
 # Convenience definitions to activate virtualenvs and list them
 actenv() {
