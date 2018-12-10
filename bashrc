@@ -50,4 +50,5 @@ function parse_git_dirty {
 		echo ""
 	fi
 }
-export PS1="\w$GREEN\`parse_git_branch\`$GRAY $ "
+export PS1="\w\[\033[0;32m\]`parse_git_branch`\[\033[00m\] $ "
+# export PS1="\w$GREEN\`parse_git_branch\`$GRAY $ "

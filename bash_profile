@@ -18,7 +18,7 @@ alias sp='spotify pause'
 alias py2='/usr/local/bin/python2'
 alias py3='/usr/local/bin/python3'
 
-source  ~/.bashrc
+# source  ~/.bashrc
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"  
 export PATH="/Users/austinbrian/anaconda3/bin:$PATH"
@@ -40,3 +40,7 @@ mkenv() {
 rmenv() {
 	rm -rf ~/envs/$1
 }
+
+# quick DIA aliases
+alias pivot="cd ~/byc/dia/Pivot"
+alias mia="cd ~/byc/dia/MIA"
