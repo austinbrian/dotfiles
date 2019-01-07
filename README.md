@@ -31,6 +31,8 @@ for tmux and vim.
 * `<C-a> s`         horizontal pane split
 * `<C-a> x`         kill pane
 * `<C-a> q`         show pane numbers
+* `<C-a> ⌥  ↓`      move pane down
+* `<C-a> ⌥  ↑`      move pane up
 
 **Movement between panes**
 * `<C-a> j`         move down a pane
