@@ -1,1 +1,8 @@
 # Add your local tmux config here
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @resurrect-strategy-vim 'session'
+
+
+# Initialize TMUX plugin manager (keep at bottom)
+run -b '~/.tmux/plugins/tpm/tpm'

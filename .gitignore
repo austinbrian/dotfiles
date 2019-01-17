@@ -1,0 +1,6 @@
+# Ignore plugins (these should be loaded in tmux.conf.local)
+# If necessary, load them up and type prefix-I to install
+tmux/plugins/
+
+# Ignore tmux resurrections
+tmux/resurrect/
