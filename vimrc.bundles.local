@@ -1,4 +1,15 @@
   " For adding in additional non-Maximum Awesome plugins
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'nvie/vim-flake8'
+
+" Shopping for an autocomplete that works
 " Plugin 'Valloric/YouCompleteMe'
+"Plugin 'roxma/vim-hug-neovim-rpc'
+"Plugin 'roxma/nvim-yarp'
+"Plugin 'ncm2/ncm2'
+""Fast python completion (use ncm2 if you want type info or snippet support)
+"Plugin 'HansPinckaers/ncm2-jedi'
+"" Words in buffer completion
+"Plugin 'ncm2/ncm2-bufword'
+""Filepath completion
+"Plugin 'ncm2/ncm2-path'

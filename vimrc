@@ -160,3 +160,5 @@ if filereadable(expand("~/.vimrc.local"))
 endif
 
 let g:airline_solarized_bg='dark'
+
+set pyxversion=0
