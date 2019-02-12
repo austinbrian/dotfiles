@@ -16,3 +16,7 @@ rmenv() {
 	rm -rf ~/envs/$1
 }
 
+# Convenience for tmux
+tat() {
+	tmux at -t $1
+}
