@@ -13,3 +13,7 @@ Plugin 'nvie/vim-flake8'
 "Plugin 'ncm2/ncm2-bufword'
 ""Filepath completion
 "Plugin 'ncm2/ncm2-path'
+"
+"Added in new markdown-friendly plugins
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
