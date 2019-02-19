@@ -16,3 +16,10 @@ rmenv() {
 	rm -rf ~/envs/$1
 }
 
+tat() {
+        tmux at -t $1
+}
+
+tls() {
+        tmux ls
+}
