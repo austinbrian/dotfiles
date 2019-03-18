@@ -15,6 +15,7 @@ alias mia="cd ~/byc/dia/MIA"
 alias dcu="docker-compose up"
 alias dcd="docker-compose down"
 alias dcps="docker-compose ps"
+alias dcub="docker-compose up --build --force-recreate"
 
 # Tree completion
 alias mtree="tree -I 'node_modules|*.pyc|*.db*|__pycache__'"
