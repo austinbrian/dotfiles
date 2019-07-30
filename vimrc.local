@@ -46,6 +46,9 @@ au BufNewFile,BufRead *.js,*.html,*.css setlocal shiftwidth=2 tabstop=2 softtabs
   " flag unnecessary whitespace
 highlight BadWhitespace ctermbg=red guibg=darkred
 au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" remove the whitespace with every save
+autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+
 
 
 " Vim tabs
@@ -80,3 +83,9 @@ let $BASH_ENV  = "~/.bash_profile"
 "   activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
 "   execfile(activate_this, dict(__file__=activate_this))
 " EOF
+
+let g:airline_solarized_bg='dark'
+
+set pyxversion=0
+
+let g:python_highlight_all = 1

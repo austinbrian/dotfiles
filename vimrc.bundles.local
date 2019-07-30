@@ -17,3 +17,9 @@ Plugin 'nvie/vim-flake8'
 "Added in new markdown-friendly plugins
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
+
+" Updated python syntax
+Plugin 'vim-python/python-syntax'
+
+" Any color you like, as long as it's
+" Plugin 'ambv/black'
