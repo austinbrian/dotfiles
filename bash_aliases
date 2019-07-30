@@ -24,4 +24,5 @@ alias dcub="docker-compose up --build --force-recreate"
 alias mtree="tree -I 'node_modules|*.pyc|*.db*|__pycache__'"
 
 # Dockerfile launch
-dsjpn="docker run -p 8888:8888 -v ~/dev/docker-notebooks:/home/jovyan jupyter/datascience-notebook"
+alias dsjpn="docker run -p 8888:8888 -v ~/dev/docker-notebooks:/home/jovyan jupyter/datascience-notebook"
+
