@@ -10,6 +10,9 @@ lsenv() {
 
 mkenv() {
 	python -m venv ~/envs/$1
+}
+
+krnlenv() { 
         source ~/envs/$1/bin/activate
         pip install --upgrade pip && pip install ipykernel jupyter
         ipykernel kernel install --user --name=$1
