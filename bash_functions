@@ -10,14 +10,14 @@ lsenv() {
 
 mkenv() {
 	python -m venv ~/envs/$1
-        source  ~/evns/$1/bin/activate
+        source  ~/envs/$1/bin/activate
         echo "Env $1 created"
 }
 
 krnlenv() {
         source ~/envs/$1/bin/activate
         pip install --upgrade pip && pip install ipykernel jupyter
-        ipykernel kernel install --user --name=$1
+        ipython kernel install --user --name=$1
 }
 
 rmenv() {

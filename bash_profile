@@ -6,6 +6,7 @@ parse_git_branch() {
 
 source  ~/.bashrc
 source ~/.bash_functions
+source ~/.bradbashrc
 
 export PS1="\w\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
 
@@ -22,3 +23,5 @@ export PATH="$PATH:~/miniconda3/bin"
     [ -f "$(brew --prefix)/etc/bash_completion.d/git-completion.bash" ] && \
         . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 }
+
+export BASH_SILENCE_DEPRECATION_WARNING=1
