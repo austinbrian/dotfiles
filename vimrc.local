@@ -75,8 +75,7 @@ set shell=/bin/bash\ --rcfile\ ~/.bash_profile
 let $BASH_ENV  = "~/.bash_profile"
 
 "python with virtualenv support
-" py << EOF
-" import os
+
 " import sys
 " if 'VIRTUAL_ENV' in os.environ:
 "   project_base_dir = os.environ['VIRTUAL_ENV']
@@ -88,4 +87,16 @@ let g:airline_solarized_bg='dark'
 
 set pyxversion=0
 
-let g:python_highlight_all = 1
+let g:python_highlight_all=1
+
+let g:black_virtualenv='~/envs/black'
+
+" Turn on autoformatting with every save
+au BufWrite * :Autoformat
+
+" But we don't want to allow the retabbing and trailing whitespace since
+" that's already taken care of
+let g:autoformat_autoindent = 0
+let g:autoformat_retab = 0
+let g:autoformat_remove_trailing_spaces = 0
+
