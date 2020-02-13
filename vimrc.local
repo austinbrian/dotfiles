@@ -89,10 +89,10 @@ set pyxversion=0
 
 let g:python_highlight_all=1
 
-let g:black_virtualenv='~/envs/black'
+let g:black_virtualenv='~/.vim/black'
 
 " Turn on autoformatting with every save
-au BufWrite * :Autoformat
+au BufWritePre * :Autoformat
 
 " But we don't want to allow the retabbing and trailing whitespace since
 " that's already taken care of
