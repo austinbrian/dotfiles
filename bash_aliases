@@ -6,6 +6,8 @@ alias bda='cd ~/OneDrive/Documents/BDA'
 alias sp='spotify pause'
 alias py2='/usr/local/bin/python2'
 alias py3='/usr/local/bin/python3'
+alias sbash='source ~/.bash_profile'
+alias svim='source ~/.vimrc'
 
 # DIA specific
 alias pivot="cd ~/byc/dia/Pivot"
