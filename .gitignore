@@ -4,3 +4,6 @@ tmux/plugins/
 
 # Ignore tmux resurrections
 tmux/resurrect/
+
+# Ignore some things in vim/
+vim/black
