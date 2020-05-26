@@ -28,3 +28,5 @@ alias mtree="tree -I 'node_modules|*.pyc|*.db*|__pycache__'"
 # Dockerfile launch
 alias dsjpn="docker run -p 8888:8888 -v ~/dev/docker-notebooks:/home/jovyan jupyter/datascience-notebook"
 
+export icloud="/Users/austinbrian/Library/Mobile Documents/com~apple~CloudDocs"
+alias icloud="'/Users/austinbrian/Library/Mobile Documents/com~apple~CloudDocs'"
