@@ -26,3 +26,8 @@ Plugin 'ambv/black'
 
 " Autoformat
 Plugin 'Chiel92/vim-autoformat'
+
+"Airline
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
