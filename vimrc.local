@@ -8,13 +8,13 @@ inoremap jj <ESC>
 "nmap <leader>hl :let @/ = ""<CR>
 
 " gui settings
-if (&t_Co == 256 || has('gui_running'))
-  if ($TERM_PROGRAM == 'iTerm.app')
-    colorscheme solarized
-  else
-    colorscheme desert
-  endif
-endif
+" if (&t_Co == 256 || has('gui_running'))
+"   if ($TERM_PROGRAM == 'iTerm.app')
+"     colorscheme solarized
+"   else
+"     colorscheme desert
+"   endif
+" endif
 
 call togglebg#map("<F5>")
 
@@ -50,7 +50,6 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 
 
-
 " Vim tabs
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
 
@@ -59,19 +58,18 @@ let NERDTreeShowHidden=1
 
 let g:ycm_python_binary_path = 'python3'
 
-" ncm2 settings
-" autocmd BufEnter * call ncm2#enable_for_buffer()
+
 " set completeopt=menuone,noselect,noinsert
 " set shortmess+=c
 " inoremap <c-c> <ESC>
-" make it fast
+" " make it fast
 " let ncm2#popup_delay = 5
 " let ncm2#complete_length = [[1, 1]]
 " " Use new fuzzy based matches
 " let g:ncm2#matcher = 'substrfuzzy'
 
 " Save bash_profile to be what runs when vim opens
-set shell=/bin/bash\ --rcfile\ ~/.bash_profile
+" set shell=/bin/bash\ --rcfile\ ~/.bash_profile
 let $BASH_ENV  = "~/.bash_profile"
 
 "python with virtualenv support
@@ -83,7 +81,7 @@ let $BASH_ENV  = "~/.bash_profile"
 "   execfile(activate_this, dict(__file__=activate_this))
 " EOF
 
-let g:airline_solarized_bg='dark'
+" let g:airline_solarized_bg='dark'
 
 set pyxversion=0
 
@@ -99,4 +97,9 @@ au BufWritePre * :Autoformat
 let g:autoformat_autoindent = 0
 let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
+
+
+" run the current buffer in python with F9 key
+autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
