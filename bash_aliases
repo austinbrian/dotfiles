@@ -30,3 +30,6 @@ alias dsjpn="docker run -p 8888:8888 -v ~/dev/docker-notebooks:/home/jovyan jupy
 
 export icloud="/Users/austinbrian/Library/Mobile Documents/com~apple~CloudDocs"
 alias icloud="'/Users/austinbrian/Library/Mobile Documents/com~apple~CloudDocs'"
+
+# Kubernetes
+k=kubectl
