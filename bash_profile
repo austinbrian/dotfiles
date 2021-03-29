@@ -5,17 +5,13 @@ parse_git_branch() {
 }
 
 source  ~/.bashrc
-source ~/.bash_functions
-source ~/.bradbashrc
 
 export PS1="\w\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
 
-source ~/.bash_aliases
-
-export PATH="/usr/local/Cellar":$PATH
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="/Users/austinbrian/anaconda3/bin:$PATH"
 export PATH="$PATH:~/miniconda3/bin"
+export PATH="/usr/local/Cellar":$PATH
 
 
 # Bash completion
@@ -26,3 +22,7 @@ export PATH="$PATH:~/miniconda3/bin"
 }
 
 export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# the power chime is annoying, so let's kill it
+defaults write com.apple.PowerChime ChimeOnNoHardware -bool true
+killall PowerChime

@@ -2,15 +2,15 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/austinbrian/.oh-my-zsh"
+export ZSH="/Users/baustin/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # ZSH_THEME="clean"
-# ZSH_THEME="powerlevel9k/powerlevel9k"
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -70,9 +70,13 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew osx)
+plugins=(git brew osx virtualenv)
+
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time virtualenv)
 
 source $ZSH/oh-my-zsh.sh
+# enable venv to show up in prompt
+# export VIRTUAL_ENV_DISABLE_PROMPT=0
 
 # User configuration
 
@@ -100,15 +104,19 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-source ~/dotfiles/bash_functions
-source ~/dotfiles/bash_aliases
-# source ~/dotfiles/bashrc
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+source ~/.bashrc
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
 
 # shows username only when not SSH
 prompt_context() {
-  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
-  # if you want to eliminate user comment out line below this one
-        prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
-    fi
-          }
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]] then
+
+    # prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
+  fi
+}
+# Add Visual Studio Code (code)
+export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
+
