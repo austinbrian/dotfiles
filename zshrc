@@ -120,3 +120,5 @@ prompt_context() {
 # Add Visual Studio Code (code)
 export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 
+# Each window should have its own history, not a single shared one
+setopt nosharehistory
