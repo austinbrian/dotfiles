@@ -1,1 +1,5 @@
+source <(kubectl completion zsh) # setup autocomplete in bash into the current shell, bash-completion package should be installed first.
+
 alias k=kubectl
+complete -F __start_kubectl k
+
