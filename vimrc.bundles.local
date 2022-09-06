@@ -31,3 +31,5 @@ Plugin 'Chiel92/vim-autoformat'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
+" Docker syntax
+Plugin 'ekalinin/dockerfile.vim'

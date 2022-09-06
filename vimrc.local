@@ -107,3 +107,7 @@ autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellesca
 " set airline theme
 let g:airline_theme='solarized'
 let g:airline_solarized_bg='dark'
+
+
+" I like it when vim wraps the lines in .md files
+set linebreak

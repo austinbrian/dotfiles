@@ -70,7 +70,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew osx virtualenv)
+plugins=(git brew macos virtualenv)
 
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time virtualenv)
 
@@ -107,8 +107,9 @@ source $ZSH/oh-my-zsh.sh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source ~/.bashrc
+source ~/.bash_profile
 
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+# export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # shows username only when not SSH
 prompt_context() {
@@ -118,7 +119,7 @@ prompt_context() {
   fi
 }
 # Add Visual Studio Code (code)
-export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
+export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # Each window should have its own history, not a single shared one
 setopt nosharehistory

@@ -14,7 +14,7 @@ krnlenv() {
         ipython kernel install --user --name=$1
 }
 mkenv() {
-	python -m venv ~/envs/$1
+	/usr/local/opt/python/libexec/bin/python -m venv ~/envs/$1
         source  ~/envs/$1/bin/activate
         pip install --upgrade pip && pip install ipykernel jupyter
         ipython kernel install --user --name=$1
@@ -34,4 +34,8 @@ tat() {
 
 tls() {
         tmux ls
+}
+
+lessmd() {
+        pandoc -s -f markdown -t man "$1" | groff -T utf8 -man | less
 }

@@ -1,24 +1,25 @@
 
 bash :
-	ln -s ~/.bash_profile ~/dotfiles/bash_profile
-	ln -s ~/.bashrc ~/dotfiles/bashrc
-	ln -s ~/.bash_aliases ~/dotfiles/bash_aliases
-	ln -s ~/.bash_functions ~/dotfiles/bash_functions
+	ln -s ~/dotfiles/bash_profile ~/.bash_profile 
+	ln -s ~/dotfiles/bashrc ~/.bashrc 
+	ln -s ~/dotfiles/bash_aliases ~/.bash_aliases 
+	ln -s ~/dotfiles/bash_functions ~/.bash_functions 
 	source ~/.bash_profile
 
 vim :
-	ln -s ~/.vim ~/dotfiles/vim
-	ln -s ~/.vimrc ~/dotfiles/vimrc
-	ln -s ~/.vimrc.bundles ~/dotfiles/vimrc.bundles
-	ln -s ~/.vimrc.bundles.local ~/dotfiles/vimrc.bundles.local
-	ln -s ~/.vimrc.local ~/dotfiles/vimrc.local
+	ln -s ~/dotfiles/vim ~/.vim 
+	ln -s ~/dotfiles/vimrc ~/.vimrc 
+	ln -s ~/dotfiles/vimrc.bundles ~/.vimrc.bundles 
+	ln -s ~/dotfiles/vimrc.bundles.local ~/.vimrc.bundles.local 
+	ln -s ~/dotfiles/vimrc.local ~/.vimrc.local 
 	vim +PlugInstall +qall
 
 tmux : 
-	ln -s ~/.tmux ~/dotfiles/tmux
-	ln -s ~/.tmux.conf ~/dotfiles/tmux.conf
-	ln -s ~/.tmux.conf.local ~/dotfiles/tmux.conf.local
+	ln -s ~/dotfiles/tmux ~/.tmux 
+	ln -s ~/dotfiles/tmux.conf ~/.tmux.conf 
+	ln -s ~/dotfiles/tmux.conf.local ~/.tmux.conf.local 
 	sh ~/.tmux/plugins/tpm/scripts/install_plugins.sh
-
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
+ 
 
 
