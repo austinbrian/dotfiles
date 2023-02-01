@@ -104,8 +104,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source ~/.bashrc
 source ~/.bash_profile
@@ -124,9 +123,3 @@ export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/b
 
 # Each window should have its own history, not a single shared one
 setopt nosharehistory
-
-# Add postgresql
-export PATH="/opt/homebrew/opt/postgresql@12/bin:$PATH"
-
-# Add pyenv
-export PATH="$(pyenv root)/shims:$PATH"

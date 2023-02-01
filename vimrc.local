@@ -16,7 +16,7 @@ inoremap jj <ESC>
 "   endif
 " endif
 
-call togglebg#map("<F5>")
+" call togglebg#map("<F5>")
 
 " Disambiguate ,a & ,t from the Align plugin, making them fast again.
 "
@@ -49,6 +49,8 @@ au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 " remove the whitespace with every save
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 
+" Ali: to indent json files on save
+" autocmd FileType json autocmd BufWritePre <buffer> (%!python -m json.tool 2>/dev/null || echo <buffer>)
 
 " Vim tabs
 map <Leader>n <plug>NERDTreeTabsToggle<CR>
@@ -56,7 +58,18 @@ map <Leader>n <plug>NERDTreeTabsToggle<CR>
 " Show hidden files in NERDTree
 let NERDTreeShowHidden=1
 
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a: info.force
+    !./install.sh
+  endif
+endfunction
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+
 let g:ycm_python_binary_path = 'python3'
+" let g:ycm_path_to_python_interpreter = '/usr/bin/python3'
+" let g:ycm_path_to_python_interpreter = '~/.pyenv/versions/3.10.6/bin/python'
+" let g:ycm_server_python_interpreter = '~/.pyenv/versions/3.10.6/bin/python'
+let g:ycm_path_to_python_interpreter = '/Users/austinbrian/.pyenv/shims/python'
 
 
 " set completeopt=menuone,noselect,noinsert
@@ -81,7 +94,7 @@ let $BASH_ENV  = "~/.bash_profile"
 "   execfile(activate_this, dict(__file__=activate_this))
 " EOF
 
-" let g:airline_solarized_bg='dark'
+let g:airline_solarized_bg='dark'
 
 set pyxversion=0
 
@@ -91,6 +104,9 @@ let g:black_virtualenv='~/.vim/black'
 
 " Turn on autoformatting with every save
 au BufWritePre * :Autoformat
+
+"Add isort to autoformatting for python
+au BufWritePre *.py :Isort
 
 " But we don't want to allow the retabbing and trailing whitespace since
 " that's already taken care of
@@ -111,3 +127,39 @@ let g:airline_solarized_bg='dark'
 
 " I like it when vim wraps the lines in .md files
 set linebreak
+
+" Remove snipmate deprecation warning
+let g:snipMate= { 'snippet_version' : 1 }
+
+" Refresh NERDTree when it's opened
+map <C-n> :call NERDTreeToggleAndRefresh()<CR>
+
+function NERDTreeToggleAndRefresh()
+    :NERDTreeToggle
+      if g:NERDTree.IsOpen()
+            :NERDTreeRefreshRoot
+              endif
+endfunction
+
+" Use tab for trigger completion with characters ahead and navigate.
+" NOTE: There's always complete item selected by default, you may want to enable
+" no select by `"suggest.noselect": true` in your configuration file.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" shortcut for wrapping strings
+set tw=88
+noremap <g-w> gqap<CR>
+
+" shortcut to format json nicely
+noremap <g-j> :%!jq<CR>
