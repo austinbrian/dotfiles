@@ -1,35 +1,41 @@
   " For adding in additional non-Maximum Awesome plugins
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'nvie/vim-flake8'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'nvie/vim-flake8'
 
 " Shopping for an autocomplete that works
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'roxma/nvim-yarp'
-Plugin 'ncm2/ncm2'
+Plug 'Valloric/YouCompleteMe'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
 "Fast python completion (use ncm2 if you want type info or snippet support)
-Plugin 'HansPinckaers/ncm2-jedi'
+Plug 'HansPinckaers/ncm2-jedi'
 " Words in buffer completion
-Plugin 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-bufword'
 "Filepath completion
-Plugin 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-path'
 
 "Added in new markdown-friendly plugins
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 " Updated python syntax
-Plugin 'vim-python/python-syntax'
+Plug 'vim-python/python-syntax'
 
 " Any color you like, as long as it's
-Plugin 'ambv/black'
+Plug 'ambv/black'
 
 " Autoformat
-Plugin 'Chiel92/vim-autoformat'
+Plug 'Chiel92/vim-autoformat'
 
 "Airline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Docker syntax
-Plugin 'ekalinin/dockerfile.vim'
+Plug 'ekalinin/dockerfile.vim'
+
+" CoC (still shopping for autocomplete)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" isort
+Plug 'fisadev/vim-isort'

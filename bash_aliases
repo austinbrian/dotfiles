@@ -1,3 +1,4 @@
+# vim: set filetype=sh :
 alias ls='ls -Gh'
 alias ll='ls -gohka'
 alias glg='git log --pretty=format:"%h %ad %s" --date=short --oneline --decorate'
