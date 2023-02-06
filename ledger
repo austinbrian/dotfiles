@@ -1,6 +1,14 @@
+# vim: set filetype=sh :
 alias carnacenv='source ~/envs/carnac/bin/activate'
 export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
 export ECRURL="777486332181.dkr.ecr.us-east-1.amazonaws.com"
 
 aws_docker_login() { aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECRURL}
 alias ecrurl='echo $ECRURL | pbcopy'
+
+aws_login() { 
+  aws_docker_login && \
+    aws codeartifact login --tool pip \
+    --repository python-ds --domain ledger-data-science \
+    --domain-owner 777486332181 --region us-east-1
+}
