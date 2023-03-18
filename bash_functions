@@ -55,7 +55,7 @@ s3-head() {
           ttttmp.csv | head ttttmp.csv && rm ttttmp.csv
         fi
 }
-opw() {echo hlVu2w03LK8s|pbcopy}
+opw() {source ~/dotfiles/.env &&  echo $OPW |pbcopy}
 
 create_ecr() {
   REPO_NAME=$1

@@ -38,4 +38,9 @@ Plug 'ekalinin/dockerfile.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " isort
-Plug 'fisadev/vim-isort'
+Plug 'brentyi/isort.vim'
+
+" colors!
+Plug 'ayu-theme/ayu-vim'
+
+Plug 'TaDaa/vimade'

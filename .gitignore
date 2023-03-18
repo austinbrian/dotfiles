@@ -7,3 +7,7 @@ tmux/resurrect/
 
 # Ignore some things in vim/
 vim/black
+
+
+# Ignore some things in zsh/
+.env
