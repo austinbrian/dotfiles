@@ -16,7 +16,7 @@ krnlenv() {
 mkenv() {
 	python -m venv ~/envs/$1
         source  ~/envs/$1/bin/activate
-        pip install --upgrade pip && pip install ipykernel jupyter
+        pip install --upgrade pip && pip install ipykernel jupyter black pre-commit
         ipython kernel install --user --name=$1
         echo "Env $1 created"
 }
@@ -52,7 +52,7 @@ s3-head() {
           --expression-type "SQL" \
           --input-serialization "CSV={}" \
           --output-serialization "CSV={}" \
-          ttttmp.csv | head ttttmp.csv && rm ttttmp.csv
+          /tmp/ttttmp.csv | head /tmp/ttttmp.csv && rm /tmp/ttttmp.csv
         fi
 }
 opw() {source ~/dotfiles/.env &&  echo $OPW |pbcopy}
