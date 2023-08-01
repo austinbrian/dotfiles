@@ -3,7 +3,6 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/austinbrian/.oh-my-zsh"
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -140,3 +139,7 @@ complete -C '$(which aws_completer)' aws
 
 # add libpq
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# add LDENV
+#
+export LDFLAGS="-I/opt/homebrew/opt/openssl/include -L/opt/homebrew/opt/openssl/lib"
