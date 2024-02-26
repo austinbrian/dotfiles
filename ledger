@@ -1,14 +1,73 @@
 # vim: set filetype=sh :
 alias carnacenv='source ~/envs/carnac/bin/activate'
 export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
-export ECRURL="777486332181.dkr.ecr.us-east-1.amazonaws.com"
 
-aws_docker_login() { aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECRURL}
+
+AWS_REGION=$(aws configure get region)
+AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+
+export ECRURL="${AWS_ACCOUNT_ID}.dkr.ecr.$AWS_REGION.amazonaws.com"
+
+aws_docker_login() { aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECRURL}
 alias ecrurl='echo $ECRURL | pbcopy'
 
-aws_login() { 
-  aws_docker_login && \
-    aws codeartifact login --tool pip \
+aws_codeartifact_signin() {
+  aws codeartifact login --tool pip \
     --repository python-ds --domain ledger-data-science \
-    --domain-owner 777486332181 --region us-east-1
+    --domain-owner 054739135172 --region us-east-2
+  }
+poetry_login() {
+  poetry config http-basic.artifact aws \
+    $(aws codeartifact get-authorization-token \
+      --domain ledger-data-science \
+      --domain-owner 054739135172 \
+      --query authorizationToken \
+      --output text)
 }
+
+aws_login() { 
+  aws_docker_login && aws_codeartifact_signin && poetry_login
+}
+
+switch_aws_profile() {
+  if [ -z "$1" ]; then
+    echo "Usage: switch_aws_profile <profile_name>"
+    return 1
+  fi
+  export AWS_PROFILE=$1
+  AWS_DEFAULT_REGION=$(aws configure get region --profile $1)
+  export AWS_REGION=$AWS_DEFAULT_REGION
+  export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+  export ECRURL="${AWS_ACCOUNT_ID}.dkr.ecr.$AWS_REGION.amazonaws.com"
+  aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECRURL
+  aws_codeartifact_signin
+  poetry_login
+}
+
+
+function code_artifact_login() {
+    local domain=$1
+    local domain_owner=$2
+    local repo=$3
+    local region=$4
+    local fixed_pip_config_command=$( aws codeartifact login \
+                                --tool pip \
+                                --domain $domain \
+                                --domain-owner $domain_owner \
+                                --repository $repo \
+                                --region $region \
+                                --dry-run \
+                            | sed 's/^pip /pip3 /'
+    )
+    eval $fixed_pip_config_command
+    poetry config http-basic.artifact aws \
+        $(aws codeartifact get-authorization-token \
+            --domain $domain \
+            --domain-owner $domain_owner \
+            --region $region \
+            --query authorizationToken \
+            --output text)
+}
+alias login_codeartifact="code_artifact_login ledger-data-science 054739135172 python-ds us-east-2"
+
+export POETRY_REPOSITORIES_ARTIFACT_URL="https://ledger-data-science-054739135172.d.codeartifact.us-east-2.amazonaws.com/pypi/python-ds/simple/"
