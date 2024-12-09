@@ -20,3 +20,7 @@ if "test ! -d ~/.tmux/plugins/tpm" \
 # Initialize TMUX plugin manager (keep at bottom)
 run -b '~/.tmux/plugins/tpm/tpm'
 
+# get a longer limit on my history
+set-option -g history-limit 50000
+
+

@@ -44,3 +44,5 @@ Plug 'brentyi/isort.vim'
 Plug 'ayu-theme/ayu-vim'
 
 Plug 'TaDaa/vimade'
+
+Plug 'hashivim/vim-terraform'

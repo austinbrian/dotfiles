@@ -161,7 +161,7 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " shortcut for wrapping strings
-set tw=88
+" set tw=88
 noremap <g-w> gqap<CR>
 
 " shortcut to format json nicely
@@ -170,8 +170,14 @@ noremap <g-j> :%!jq<CR>
 
 " set color scheme 
 " set termguicolors
-" set background=dark
-colorscheme slate
+set background=dark
+"colorscheme slate
+"
+set termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
 " Dim inactive windows using 'colorcolumn' setting
 " This tends to slow down redrawing, but is very useful.

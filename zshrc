@@ -106,14 +106,12 @@ source $ZSH/oh-my-zsh.sh
 # source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-source ~/.bashrc
-source ~/.bash_profile
 
 # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # shows username only when not SSH
 prompt_context() {
-  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]] then
+  if [[ "$USER" != "$DEFAULT_USER" || -n "$SSH_CLIENT" ]]; then
 
     # prompt_segment black default "%(!.%{%F{yellow}%}.)$USER"
   fi
@@ -140,6 +138,21 @@ complete -C '$(which aws_completer)' aws
 # add libpq
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
+source ~/.bashrc
+source ~/.bash_profile
 # add LDENV
 #
 export LDFLAGS="-I/opt/homebrew/opt/openssl/include -L/opt/homebrew/opt/openssl/lib"
+
+# >>> VSCode venv deactivate hook >>>
+# source ~/.vscode-python/deactivate if file exists
+test -f ~/.vscode-python/deactivate &&
+  source ~/.vscode-python/deactivate
+# <<< VSCode venv deactivate hook <<<
+
+# bun completions
+[ -s "/Users/austinbrian/.bun/_bun" ] && source "/Users/austinbrian/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
