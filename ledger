@@ -2,14 +2,18 @@
 alias carnacenv='source ~/envs/carnac/bin/activate'
 export LDFLAGS="-I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib"
 
+# AWS variables - only set when needed (call init_aws_vars function)
+init_aws_vars() {
+  export AWS_REGION=$(aws configure get region)
+  export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+  export ECRURL="${AWS_ACCOUNT_ID}.dkr.ecr.$AWS_REGION.amazonaws.com"
+}
 
-AWS_REGION=$(aws configure get region)
-AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-
-export ECRURL="${AWS_ACCOUNT_ID}.dkr.ecr.$AWS_REGION.amazonaws.com"
-
-aws_docker_login() { aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECRURL}
-alias ecrurl='echo $ECRURL | pbcopy'
+aws_docker_login() { 
+  init_aws_vars
+  aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECRURL
+}
+alias ecrurl='init_aws_vars && echo $ECRURL | pbcopy'
 
 aws_codeartifact_signin() {
   aws codeartifact login --tool pip \
@@ -35,10 +39,7 @@ switch_aws_profile() {
     return 1
   fi
   export AWS_PROFILE=$1
-  AWS_DEFAULT_REGION=$(aws configure get region --profile $1)
-  export AWS_REGION=$AWS_DEFAULT_REGION
-  export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-  export ECRURL="${AWS_ACCOUNT_ID}.dkr.ecr.$AWS_REGION.amazonaws.com"
+  init_aws_vars
   aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECRURL
   aws_codeartifact_signin
   poetry_login

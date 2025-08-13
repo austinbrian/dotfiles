@@ -74,3 +74,14 @@ create_ecr() {
 showports() {
   lsof -iTCP -sTCP:LISTEN -n -P | awk 'NR>1{print $9, $1, $2}'|sed 's/.*://'|while read port process pid; do echo "Port $port:$(ps -p $pid -o command= | sed 's/^-//')(PID:$pid)";done|sort -n
 }
+
+# Load AWS functions when needed
+load_aws() {
+  if [ -f ~/dotfiles/ledger ]; then
+    source ~/dotfiles/ledger
+    init_aws_vars
+    echo "AWS environment loaded. Available functions: aws_login, aws_docker_login, switch_aws_profile"
+  else
+    echo "AWS ledger file not found"
+  fi
+}

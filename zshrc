@@ -126,10 +126,13 @@ setopt nosharehistory
 export PATH="/opt/homebrew/opt/postgresql@12/bin:$PATH"
 
 # Add pyenv
-export PATH="$(pyenv root)/shims:$PATH"
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# Lazy load pyenv to speed up shell startup
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init --path)"
+  eval "$(pyenv init -)"
+fi
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
 # Add aws completion
@@ -138,8 +141,8 @@ complete -C '$(which aws_completer)' aws
 # add libpq
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
+# Only source bashrc to avoid duplicate loading
 source ~/.bashrc
-source ~/.bash_profile
 # add LDENV
 #
 export LDFLAGS="-I/opt/homebrew/opt/openssl/include -L/opt/homebrew/opt/openssl/lib"
@@ -156,3 +159,15 @@ test -f ~/.vscode-python/deactivate &&
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+. "$HOME/.local/bin/env"
+
+# Lazy load NVM to speed up shell startup
+export NVM_DIR="$HOME/.nvm"
+# Only load nvm if the directory exists
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  # Create an alias to load nvm on first use
+  alias nvm='unalias nvm && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm'
+  alias node='unalias node && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && node'
+  alias npm='unalias npm && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && npm'
+fi
