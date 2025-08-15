@@ -171,3 +171,4 @@ if [ -s "$NVM_DIR/nvm.sh" ]; then
   alias node='unalias node && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && node'
   alias npm='unalias npm && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && npm'
 fi
+eval "$(uv generate-shell-completion zsh)"
