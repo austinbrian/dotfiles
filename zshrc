@@ -1,5 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+#
+# --- NVM init moved after oh-my-zsh to avoid conflicts with nvm plugin ---
+# NVM_DIR is set by the nvm plugin
+# --- end NVM init ---
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/austinbrian/.oh-my-zsh"
@@ -74,6 +78,8 @@ plugins=(git brew macos virtualenv colorize colored-man-pages python)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time virtualenv)
 
 source $ZSH/oh-my-zsh.sh
+
+
 # enable venv to show up in prompt
 # export VIRTUAL_ENV_DISABLE_PROMPT=0
 
@@ -125,15 +131,15 @@ setopt nosharehistory
 # Add postgresql
 export PATH="/opt/homebrew/opt/postgresql@12/bin:$PATH"
 
-# Add pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-# Lazy load pyenv to speed up shell startup
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init --path)"
-  eval "$(pyenv init -)"
-fi
-export PYTHON_CONFIGURE_OPTS="--enable-shared"
+# # Add pyenv
+# export PYENV_ROOT="$HOME/.pyenv"
+# command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+# # Lazy load pyenv to speed up shell startup
+# if command -v pyenv 1>/dev/null 2>&1; then
+#   eval "$(pyenv init --path)"
+#   eval "$(pyenv init -)"
+# fi
+# export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
 # Add aws completion
 complete -C '$(which aws_completer)' aws
@@ -142,7 +148,7 @@ complete -C '$(which aws_completer)' aws
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # Only source bashrc to avoid duplicate loading
-source ~/.bashrc
+# source ~/.bashrc
 # add LDENV
 #
 export LDFLAGS="-I/opt/homebrew/opt/openssl/include -L/opt/homebrew/opt/openssl/lib"
@@ -160,15 +166,5 @@ test -f ~/.vscode-python/deactivate &&
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-. "$HOME/.local/bin/env"
+# . "$HOME/.local/bin/env"
 
-# Lazy load NVM to speed up shell startup
-export NVM_DIR="$HOME/.nvm"
-# Only load nvm if the directory exists
-if [ -s "$NVM_DIR/nvm.sh" ]; then
-  # Create an alias to load nvm on first use
-  alias nvm='unalias nvm && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm'
-  alias node='unalias node && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && node'
-  alias npm='unalias npm && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && npm'
-fi
-eval "$(uv generate-shell-completion zsh)"
