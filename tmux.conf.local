@@ -7,13 +7,14 @@ set -g @resurrect-strategy-vim 'session'
 # Turn on continuum
 set -g @continuum-restore 'on'
 
-#set inactive/active window styles
-set -g window-style 'fg=colour247,bg=colour236'
-set -g window-active-style 'fg=colour250,bg=black'
+# Inactive pane dimming — muted text + slightly lighter background
+# colour235 is a dark gray that's just visible against most dark theme backgrounds
+set -g window-style 'fg=colour242,bg=colour235'
+set -g window-active-style 'fg=terminal,bg=terminal'
 
-# set the pane border colors 
-set -g pane-border-style 'fg=colour235,bg=colour238' 
-set -g pane-active-border-style 'fg=colour51,bg=colour236'
+# Pane borders — colour238 (subtle), colour12 (bright blue from terminal palette)
+set -g pane-border-style 'fg=colour238'
+set -g pane-active-border-style 'fg=colour12'
 
 if "test ! -d ~/.tmux/plugins/tpm" \
    "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
