@@ -7,16 +7,6 @@ inoremap jj <ESC>
 "set hlsearch
 "nmap <leader>hl :let @/ = ""<CR>
 
-" gui settings
-" if (&t_Co == 256 || has('gui_running'))
-"   if ($TERM_PROGRAM == 'iTerm.app')
-"     colorscheme solarized
-"   else
-"     colorscheme desert
-"   endif
-" endif
-
-" call togglebg#map("<F5>")
 
 " Disambiguate ,a & ,t from the Align plugin, making them fast again.
 "
@@ -94,7 +84,6 @@ let $BASH_ENV  = "~/.bash_profile"
 "   execfile(activate_this, dict(__file__=activate_this))
 " EOF
 
-let g:airline_solarized_bg='dark'
 
 set pyxversion=0
 
@@ -123,9 +112,8 @@ autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%,
 autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 
 
-" set airline theme
-let g:airline_theme='solarized'
-let g:airline_solarized_bg='dark'
+" set airline theme — 'dark' follows terminal colors
+let g:airline_theme='dark'
 
 
 " I like it when vim wraps the lines in .md files
@@ -168,16 +156,9 @@ noremap <g-w> gqap<CR>
 noremap <g-j> :%!jq<CR>
 
 
-" set color scheme 
-" set termguicolors
+" Use terminal colors — iTerm2 owns the palette
 set background=dark
-"colorscheme slate
-"
-set termguicolors     " enable true colors support
-" let ayucolor="light"  " for light version of theme
-let ayucolor="mirage" " for mirage version of theme
-" let ayucolor="dark"   " for dark version of theme
-colorscheme ayu
+set termguicolors
 
 " Dim inactive windows using 'colorcolumn' setting
 " This tends to slow down redrawing, but is very useful.

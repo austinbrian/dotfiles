@@ -133,13 +133,14 @@ autocmd User Rails silent! Rnavcommand stepdefinition features/step_definitions 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
-" Fix Cursor in TMUX
+" Cursor shape: bar in insert, block in normal (works in tmux + iTerm2)
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" Enable true color in tmux (needed for termguicolors)
 if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\" " Vertical bar in insert mode
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\" " Block in normal mode
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
 " Don't copy the contents of an overwritten selection.
