@@ -116,6 +116,16 @@ autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellesca
 let g:airline_theme='dark'
 
 
+" Subtle spell check — soft underline, no harsh background
+" Applied via autocmd so it runs after colorscheme/plugins load
+augroup SubtleSpell
+  autocmd!
+  autocmd ColorScheme,VimEnter * highlight SpellBad   cterm=underline ctermfg=174 ctermbg=NONE gui=undercurl guifg=NONE guibg=NONE guisp=#f38ba8
+  autocmd ColorScheme,VimEnter * highlight SpellCap   cterm=underline ctermfg=110 ctermbg=NONE gui=undercurl guifg=NONE guibg=NONE guisp=#89b4fa
+  autocmd ColorScheme,VimEnter * highlight SpellRare  cterm=underline ctermfg=249 ctermbg=NONE gui=undercurl guifg=NONE guibg=NONE guisp=#a6adc8
+  autocmd ColorScheme,VimEnter * highlight SpellLocal cterm=underline ctermfg=249 ctermbg=NONE gui=undercurl guifg=NONE guibg=NONE guisp=#a6adc8
+augroup END
+
 " I like it when vim wraps the lines in .md files
 set linebreak
 
