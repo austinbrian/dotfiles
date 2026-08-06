@@ -18,10 +18,10 @@ alias n4j_auth=$NEO4J_AUTH
 alias n4j_instance=$NEO4J_INSTANCE
 
 # Docker-compose
-alias dcu="docker-compose up"
-alias dcd="docker-compose down"
-alias dcps="docker-compose ps"
-alias dcub="docker-compose up --build --force-recreate"
+alias dcu="docker compose up"
+alias dcd="docker compose down"
+alias dcps="docker compose ps"
+alias dcub="docker compose up --build --force-recreate"
 
 # Tree completion
 alias mtree="tree -I 'node_modules|*.pyc|*.db*|__pycache__'"
@@ -36,3 +36,6 @@ alias icloud="'/Users/austinbrian/Library/Mobile Documents/com~apple~CloudDocs'"
 k=kubectl
 
 # alias showports='lsof -iTCP -sTCP:LISTEN -n -P | awk 'NR>1{print $9, $1, $2}'|sed 's/.*://'|while read port process pid; do echo "Port $port:$(ps -p $pid -o command= | sed 's/^-//')(PID:$pid)";done|sort -n'
+
+alias cc="CLAUDE_CODE_NO_FLICKER=1 claude --dangerously-skip-permissions --chrome"
+alias clawstin="ssh -v clawstin@clawstin-mini.local"

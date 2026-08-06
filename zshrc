@@ -231,7 +231,7 @@ daylog() {
   local p; p=$(daylog-path "$@") || return 1
   EDITOR="${VISUAL:-${EDITOR:-vim}}" less "$p"
 }
-dlog()  { local p; p=$(daylog-path "$@") || return 1; glow -p -w 180 "$p" }
+dlog()  { local p; p=$(daylog-path "$@") || return 1; glow -p -w 120 "$p" }
 dedit() { local p; p=$(daylog-path "$@") || return 1; "${VISUAL:-${EDITOR:-vim}}" "$p" }
 
 
