@@ -109,6 +109,17 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
+# Pager: syntax highlighting everywhere via bat as a less input preprocessor.
+# Preprocessing (rather than `bat file | less`) keeps less pointed at the real
+# file, so `v` still opens $EDITOR at the current line. The single-bar form falls
+# back to the raw file whenever bat produces NO output (directories, files bat
+# errors on). Binaries are the exception: bat prints its "binary content will not
+# be printed" warning to stdout, so less shows that line instead of the bytes.
+# Escape hatches: `less -L file` skips the preprocessor for one invocation;
+# LESSOPEN= less file does the same via the environment.
+export LESSOPEN='|bat --color=always --style=plain --paging=never -- %s'
+export LESS='-R'
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -180,8 +191,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # . "$HOME/.local/bin/env"
 
-# Daylog viewer function
-daylog() {
+# Resolve a daylog date spec to an absolute path. Prints the path on stdout;
+# diagnostics go to stderr so $(daylog-path ...) is always safe to interpolate.
+daylog-path() {
   local daylog_dir="$HOME/ldgr/.daylog"
   local today=$(date +%Y-%m-%d)
   local target_date
@@ -196,19 +208,31 @@ daylog() {
   esac
 
   if [[ -z "$target_date" ]]; then
-    echo "No daylog found ${1} of today"
+    print -u2 "No daylog ${1} of today"
     return 1
   fi
 
   local daylog_path="$daylog_dir/${target_date}.md"
 
-  if [[ -f "$daylog_path" ]]; then
-    less "$daylog_path"
-  else
-    echo "No daylog found for ${target_date}"
-    echo "Expected location: $daylog_path"
+  if [[ ! -f "$daylog_path" ]]; then
+    print -u2 "No daylog for ${target_date} (expected $daylog_path)"
+    return 1
   fi
+
+  print -r -- "$daylog_path"
 }
+
+# Daylog viewers.
+#   daylog — paging with highlighting from the global LESSOPEN preprocessor;
+#            press `v` to jump into vim at the current line.
+#   dlog   — glow's rendered markdown. No edit escape; quit and use dedit.
+#   dedit  — straight into the editor.
+daylog() {
+  local p; p=$(daylog-path "$@") || return 1
+  EDITOR="${VISUAL:-${EDITOR:-vim}}" less "$p"
+}
+dlog()  { local p; p=$(daylog-path "$@") || return 1; glow -p -w 180 "$p" }
+dedit() { local p; p=$(daylog-path "$@") || return 1; "${VISUAL:-${EDITOR:-vim}}" "$p" }
 
 
 # opencode
