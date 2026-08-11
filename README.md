@@ -83,3 +83,56 @@ These are available after toggling NERDTree on with `,d`
 * `?`               Quick help
 
 This is very largely from [maximum-awesome](https://github.com/square/maximum-awesome), built by Square.
+
+## Colours — the "Nord Salmon" theme
+----
+One palette across `less`, `dlog`, and vim. Install or reinstall with `make theme`.
+
+### What it is
+Canonical **Nord**, which is already what iTerm2 renders (its dark palette is a
+pure Nord set: bg `#2E3440`, fg `#D8DEE9`, red `#BF616A`, blue `#81A1C1`).
+Vim has no colorscheme — it renders the terminal palette — so vim was already
+Nord and needed no rebasing.
+
+Two deliberate departures from canonical Nord, applied identically everywhere:
+
+| element | canonical Nord | here |
+| --- | --- | --- |
+| headings | `#88C0D0` nord8 frost cyan | `#81A1C1` nord9 blue |
+| inline code | `#8FBCBB` nord7 | `#BF616A` nord11 salmon |
+
+### Where each surface gets it
+| surface | mechanism | file |
+| --- | --- | --- |
+| `less` (via the `bat` LESSOPEN preprocessor) | `$BAT_THEME` | `config/bat/themes/Nord Salmon.tmTheme` |
+| `dlog` / `glow` | `-s "$GLAMOUR_STYLE"` | `config/glow/nord-salmon.json` |
+| vim | direct `highlight` in an autocmd group | `vimrc.local` |
+
+Both env vars are exported from `zshrc`.
+
+### Changing a colour
+Everything is tracked in this repo; nothing is authored in `~/.config`.
+
+* **bat / less** — edit the `.tmTheme`, then **`bat cache --build`** (or
+  `make theme`). Without the rebuild, nothing changes: bat reads a compiled
+  cache, not the file. The theme is keyed on three scopes — `markup.heading`,
+  `entity.name.section` (this one colours the heading *text*; `markup.heading`
+  only covers the `#` markers), and `markup.raw.inline` / `markup.raw.block`.
+  The upstream base is [crabique/Nord-plist](https://github.com/crabique/Nord-plist),
+  the same source bat vendors for its built-in Nord.
+* **glow / dlog** — edit the JSON; no build step. Glamour parses it with
+  `encoding/json`, so **an unknown or misspelled key is silently ignored** rather
+  than erroring. Verify a change actually landed instead of assuming.
+* **vim** — edit the `NordSalmonMarkdown` / `SubtleSpell` groups in `vimrc.local`.
+
+### Verifying
+Colour is stripped when output is not a TTY, and forcing it with
+`CLICOLOR_FORCE=1` downsamples to ANSI-16, which is misleading. Use a real pty:
+
+```sh
+TERM=xterm-256color script -q /dev/null glow -s "$GLAMOUR_STYLE" -w 60 FILE | cat -v
+bat --color=always --style=plain --paging=never FILE | cat -v
+```
+
+Then grep for the truecolor escapes: `38;2;129;161;193` is `#81A1C1` (headings),
+`38;2;191;97;106` is `#BF616A` (code).

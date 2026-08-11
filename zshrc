@@ -120,6 +120,17 @@ source $ZSH/oh-my-zsh.sh
 export LESSOPEN='|bat --color=always --style=plain --paging=never -- %s'
 export LESS='-R'
 
+# Theme: "Nord Salmon" — canonical Nord (which is what iTerm2 and therefore vim
+# already render) with two departures, applied identically to bat and glow:
+#   headings     nord8  #88C0D0 -> nord9  #81A1C1  (blue, not frost cyan)
+#   inline code  nord7  #8FBCBB -> nord11 #BF616A  (salmon, not green)
+# Sources live in this repo, not in ~/.config:
+#   config/bat/themes/Nord Salmon.tmTheme   (symlinked; needs `bat cache --build`)
+#   config/glow/nord-salmon.json            (read directly by path)
+# `make theme` installs both. Run `bat cache --build` after editing the tmTheme.
+export BAT_THEME='Nord Salmon'
+export GLAMOUR_STYLE="$HOME/dotfiles/config/glow/nord-salmon.json"
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -231,7 +242,7 @@ daylog() {
   local p; p=$(daylog-path "$@") || return 1
   EDITOR="${VISUAL:-${EDITOR:-vim}}" less "$p"
 }
-dlog()  { local p; p=$(daylog-path "$@") || return 1; glow -p -w 120 "$p" }
+dlog()  { local p; p=$(daylog-path "$@") || return 1; glow -s "$GLAMOUR_STYLE" -p -w 120 "$p" }
 dedit() { local p; p=$(daylog-path "$@") || return 1; "${VISUAL:-${EDITOR:-vim}}" "$p" }
 
 

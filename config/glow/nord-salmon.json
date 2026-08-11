@@ -1,0 +1,124 @@
+{
+  "_comment": [
+    "Nord Salmon — glamour/glow style matching the iTerm2 Nord palette.",
+    "Two deliberate departures from canonical Nord, mirrored in the bat theme",
+    "at config/bat/themes/Nord Salmon.tmTheme so `less` and `dlog` agree:",
+    "  headings     nord8  #88C0D0 -> nord9  #81A1C1  (blue, not frost cyan)",
+    "  inline code  nord7  #8FBCBB -> nord11 #BF616A  (salmon, not green)",
+    "Everything else is canonical Nord, which is also what vim renders via the",
+    "terminal palette. Palette reference:",
+    "  nord0  #2E3440  bg          nord8  #88C0D0  frost cyan / links",
+    "  nord1  #3B4252  raised bg   nord9  #81A1C1  blue / headings",
+    "  nord3  #4C566A  muted       nord11 #BF616A  salmon / code",
+    "  nord4  #D8DEE9  fg          nord13 #EBCB8B  yellow / emphasis",
+    "  nord6  #ECEFF4  bright fg   nord14 #A3BE8C  green / strings",
+    "                              nord15 #B48EAD  purple / numbers"
+  ],
+
+  "document": {
+    "block_prefix": "\n",
+    "block_suffix": "\n",
+    "color": "#D8DEE9",
+    "margin": 2
+  },
+  "block_quote": {
+    "color": "#D8DEE9",
+    "italic": true,
+    "indent": 1,
+    "indent_token": "│ "
+  },
+  "paragraph": {},
+  "list": {
+    "level_indent": 2
+  },
+
+  "heading": {
+    "block_suffix": "\n",
+    "color": "#81A1C1",
+    "bold": true
+  },
+  "h1": {
+    "prefix": " ",
+    "suffix": " ",
+    "color": "#ECEFF4",
+    "background_color": "#5E81AC",
+    "bold": true
+  },
+  "h2": { "prefix": "## ", "color": "#81A1C1", "bold": true },
+  "h3": { "prefix": "### ", "color": "#81A1C1", "bold": true },
+  "h4": { "prefix": "#### ", "color": "#81A1C1" },
+  "h5": { "prefix": "##### ", "color": "#81A1C1" },
+  "h6": { "prefix": "###### ", "color": "#81A1C1" },
+
+  "text": {},
+  "strikethrough": { "crossed_out": true, "color": "#4C566A" },
+  "emph": { "color": "#EBCB8B", "italic": true },
+  "strong": { "color": "#ECEFF4", "bold": true },
+  "hr": { "color": "#4C566A", "format": "\n--------\n" },
+
+  "item": { "block_prefix": "• ", "color": "#81A1C1" },
+  "enumeration": { "block_prefix": ". ", "color": "#81A1C1" },
+  "task": { "ticked": "[✓] ", "unticked": "[ ] " },
+
+  "link": { "color": "#88C0D0", "underline": true },
+  "link_text": { "color": "#81A1C1", "bold": true },
+  "image": { "color": "#88C0D0", "underline": true },
+  "image_text": { "color": "#B48EAD", "format": "Image: {{.}} →" },
+
+  "code": {
+    "prefix": " ",
+    "suffix": " ",
+    "color": "#BF616A",
+    "background_color": "#3B4252"
+  },
+  "code_block": {
+    "color": "#D8DEE9",
+    "margin": 2,
+    "chroma": {
+      "text": { "color": "#D8DEE9" },
+      "error": { "color": "#BF616A" },
+      "comment": { "color": "#4C566A", "italic": true },
+      "comment_preproc": { "color": "#5E81AC" },
+      "keyword": { "color": "#81A1C1" },
+      "keyword_reserved": { "color": "#81A1C1" },
+      "keyword_namespace": { "color": "#81A1C1" },
+      "keyword_type": { "color": "#8FBCBB" },
+      "operator": { "color": "#81A1C1" },
+      "punctuation": { "color": "#ECEFF4" },
+      "name": { "color": "#D8DEE9" },
+      "name_builtin": { "color": "#81A1C1" },
+      "name_tag": { "color": "#81A1C1" },
+      "name_attribute": { "color": "#8FBCBB" },
+      "name_class": { "color": "#8FBCBB" },
+      "name_constant": { "color": "#8FBCBB" },
+      "name_decorator": { "color": "#D08770" },
+      "name_exception": { "color": "#BF616A" },
+      "name_function": { "color": "#88C0D0" },
+      "name_other": { "color": "#D8DEE9" },
+      "literal": { "color": "#B48EAD" },
+      "literal_number": { "color": "#B48EAD" },
+      "literal_date": { "color": "#B48EAD" },
+      "literal_string": { "color": "#A3BE8C" },
+      "literal_string_escape": { "color": "#EBCB8B" },
+      "generic_deleted": { "color": "#BF616A" },
+      "generic_inserted": { "color": "#A3BE8C" },
+      "generic_emph": { "color": "#EBCB8B", "italic": true },
+      "generic_strong": { "color": "#ECEFF4", "bold": true },
+      "generic_subheading": { "color": "#81A1C1" },
+      "background": { "background_color": "#2E3440" }
+    }
+  },
+
+  "table": {
+    "center_separator": "┼",
+    "column_separator": "│",
+    "row_separator": "─"
+  },
+
+  "definition_list": {},
+  "definition_term": { "color": "#81A1C1", "bold": true },
+  "definition_description": { "block_prefix": "\n🠶 " },
+
+  "html_block": {},
+  "html_span": {}
+}

@@ -16,9 +16,20 @@ vim :
 	ln -sf ~/dotfiles/vimrc.local ~/.vimrc.local 
 	vim +PlugInstall +qall
 
-tmux : 
-	ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf 
-	ln -sf ~/dotfiles/tmux.conf.local ~/.tmux.conf.local 
+# "Nord Salmon" theme for bat/less and glow/dlog. Sources live in this repo
+# under config/; nothing is authored in ~/.config directly. The bat theme is
+# symlinked and must be compiled into bat's cache — re-run `make theme` (or just
+# `bat cache --build`) after editing the tmTheme. glow reads its JSON by path via
+# $GLAMOUR_STYLE, so it needs no build step.
+theme :
+	mkdir -p ~/.config/bat
+	ln -sfn ~/dotfiles/config/bat/themes ~/.config/bat/themes
+	bat cache --build
+	@echo 'Installed. Verify: bat --list-themes | grep "Nord Salmon"'
+
+tmux :
+	ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
+	ln -sf ~/dotfiles/tmux.conf.local ~/.tmux.conf.local
 	# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm 
 	# sh ~/.tmux/plugins/tpm/scripts/install_plugins.sh
  
@@ -26,10 +37,11 @@ tmux :
 	# install oh-my-zsh
 	sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-setup: 
+setup:
 	ln -sf ~/
-	brew install tmux vim
+	brew install tmux vim bat glow
 	make bash
 	make tmux
 	make vim
+	make theme
 
