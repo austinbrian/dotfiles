@@ -107,6 +107,8 @@ Two deliberate departures from canonical Nord, applied identically everywhere:
 | `less` (via the `bat` LESSOPEN preprocessor) | `$BAT_THEME` | `config/bat/themes/Nord Salmon.tmTheme` |
 | `dlog` / `glow` | `-s "$GLAMOUR_STYLE"` | `config/glow/nord-salmon.json` |
 | vim | direct `highlight` in an autocmd group | `vimrc.local` |
+| vim spell exemptions | `@NoSpell` syntax matches | `config/vim/after/syntax/markdown.vim` |
+| vim dictionary | `spellfile` | `config/vim/spell/en.utf-8.add` |
 
 Both env vars are exported from `zshrc`.
 
@@ -123,7 +125,37 @@ Everything is tracked in this repo; nothing is authored in `~/.config`.
 * **glow / dlog** — edit the JSON; no build step. Glamour parses it with
   `encoding/json`, so **an unknown or misspelled key is silently ignored** rather
   than erroring. Verify a change actually landed instead of assuming.
-* **vim** — edit the `NordSalmonMarkdown` / `SubtleSpell` groups in `vimrc.local`.
+* **vim** — edit the `NordSalmonMarkdown` / `SubtleSpell` functions in
+  `vimrc.local`. **Target the groups `plasticboy/vim-markdown` actually creates,
+  not the built-in markdown syntax's.** This is the trap: `markdownH1` and
+  `markdownCode` simply do not exist here, so setting them is a silent no-op.
+  The real names are `htmlH1`..`htmlH6` (default `-> Title ->` magenta, which is
+  where the purple headings came from), `mkdCode`, `mkdHeading`, and — for
+  emphasis — `htmlItalic` / `htmlBold`, *not* `mkdItalic` / `mkdBold`. Check any
+  given character with:
+
+  ```vim
+  :echo synIDattr(synID(line('.'), col('.'), 1), 'name')
+  ```
+
+### Spell check
+Deliberately quiet: one muted grey-blue undercurl, no foreground override. The
+useful half is suppressing false positives rather than dimming them.
+
+* **Shapes** — `config/vim/after/syntax/markdown.vim` marks ticket refs
+  (`KOR-2286`), acronyms (`BDX`), `snake_case`, anything containing a digit, hex
+  colours, code spans, URLs, and paths as `@NoSpell`. Enumerating these in the
+  dictionary would never converge, since every ticket number is a new "word".
+* **Vocabulary** — `config/vim/spell/en.utf-8.add` holds real words the en_US
+  dictionary lacks (reinsurance terms, tool names, `async`, `worktree`). Add one
+  with `zg` while the cursor is on it; vim appends and recompiles.
+* `spelloptions=camel` keeps `evaluationDate` from being split into two words.
+
+Two gotchas. A `contains=@NoSpell` match **replaces** the contains list, so an
+exemption laid over an already-coloured span (inline code) kills its colour
+unless you re-link it — hence the `hi link` rules in that file. And the compiled
+`.spl` is what vim reads; `make theme` rebuilds it, otherwise vim only
+regenerates when it notices the `.add` is newer.
 
 ### Verifying
 Colour is stripped when output is not a TTY, and forcing it with

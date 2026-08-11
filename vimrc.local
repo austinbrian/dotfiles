@@ -116,47 +116,116 @@ autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellesca
 let g:airline_theme='dark'
 
 
-" Subtle spell check — soft underline, no harsh background
-" Applied via autocmd so it runs after colorscheme/plugins load
-" Undercurl colours are Nord, matching the terminal palette and the shared
-" "Nord Salmon" theme used by bat/less and glow/dlog. These were Catppuccin
-" hexes, which was the only place vim disagreed with the palette.
+" Spell check, deliberately quiet.
+"
+" It used to be an angry red undercurl that fought the rest of the palette. The
+" signal-to-noise does not justify that: prose spelling is a nice-to-have, and
+" the false positives here are relentless (ticket refs, identifiers, jargon).
+" So: one muted grey-blue undercurl for every category, no foreground override
+" at all — the word keeps its normal colour and only picks up a faint squiggle.
+"
+" ctermfg is explicitly NONE. Setting it was what actually recoloured the *text*
+" in the 256-colour fallback, which is most of what read as "angry".
+"
+" The false positives are attacked separately, and that is the more useful half:
+"   after/syntax/markdown.vim  — @NoSpell for ticket refs, code, URLs, acronyms
+"   spell/en.utf-8.add         — the domain and tooling vocabulary
+" 'spelloptions=camel' stops camelCase identifiers being split into nonsense
+" (evaluationDate is one word, not "evaluation" + "Date").
+set spelloptions=camel
+set spellfile=~/.vim/spell/en.utf-8.add
+
+function! s:SubtleSpell() abort
+  highlight SpellBad   cterm=underline ctermfg=NONE ctermbg=NONE gui=undercurl guifg=NONE guibg=NONE guisp=#4C566A
+  highlight SpellCap   cterm=NONE      ctermfg=NONE ctermbg=NONE gui=NONE      guifg=NONE guibg=NONE guisp=NONE
+  highlight SpellRare  cterm=underline ctermfg=NONE ctermbg=NONE gui=undercurl guifg=NONE guibg=NONE guisp=#434C5E
+  highlight SpellLocal cterm=NONE      ctermfg=NONE ctermbg=NONE gui=NONE      guifg=NONE guibg=NONE guisp=NONE
+endfunction
+
 augroup SubtleSpell
   autocmd!
-  autocmd ColorScheme,VimEnter * highlight SpellBad   cterm=underline ctermfg=131 ctermbg=NONE gui=undercurl guifg=NONE guibg=NONE guisp=#BF616A
-  autocmd ColorScheme,VimEnter * highlight SpellCap   cterm=underline ctermfg=110 ctermbg=NONE gui=undercurl guifg=NONE guibg=NONE guisp=#81A1C1
-  autocmd ColorScheme,VimEnter * highlight SpellRare  cterm=underline ctermfg=139 ctermbg=NONE gui=undercurl guifg=NONE guibg=NONE guisp=#B48EAD
-  autocmd ColorScheme,VimEnter * highlight SpellLocal cterm=underline ctermfg=109 ctermbg=NONE gui=undercurl guifg=NONE guibg=NONE guisp=#8FBCBB
+  autocmd ColorScheme,VimEnter,Syntax * call s:SubtleSpell()
 augroup END
+" Also apply now: VimEnter has already fired for a session that sources this
+" late, and the default SpellBad (#ff0000) would otherwise survive until the
+" next colorscheme change.
+call s:SubtleSpell()
 
 " Markdown to match the shared "Nord Salmon" theme, so a daylog looks the same
 " in vim as it does through `daylog` (bat/less) and `dlog` (glow).
 "   headings          #81A1C1  nord9   blue
 "   code / backticks  #BF616A  nord11  salmon
+"   emphasis          #EBCB8B  nord13  yellow, bold + italic so it pops
+"   strong            #ECEFF4  nord6   brightest fg, bold
 "   links             #88C0D0  nord8   frost cyan
+"
+" These target the groups plasticboy/vim-markdown actually creates, NOT the
+" built-in markdown syntax's markdownH1/markdownCode — those groups never exist
+" here, which is why setting them did nothing. Under vim-markdown:
+"   headings     htmlH1..htmlH6  (default: -> Title  -> magenta, the purple)
+"   inline code  mkdCode         (default: -> String -> Constant)
+"   heading #s   mkdHeading
+" Verify with :echo synIDattr(synID(line('.'),col('.'),1),'name') on the text.
+"
 " Vim runs no colorscheme — iTerm2 owns the palette — so these are set directly
-" rather than layered over one. VimEnter as well as ColorScheme because there is
-" no colorscheme event to hang them off in the default case.
+" rather than layered over one. Hooked on Syntax as well as ColorScheme/VimEnter:
+" vim-markdown uses `hi def link`, which will not clobber an existing definition,
+" but a buffer opened after startup loads its syntax fresh.
+function! s:NordSalmonMarkdown() abort
+  highlight htmlH1 cterm=bold ctermfg=110 gui=bold guifg=#81A1C1
+  highlight htmlH2 cterm=bold ctermfg=110 gui=bold guifg=#81A1C1
+  highlight htmlH3 cterm=bold ctermfg=110 gui=bold guifg=#81A1C1
+  highlight htmlH4 ctermfg=110 guifg=#81A1C1
+  highlight htmlH5 ctermfg=110 guifg=#81A1C1
+  highlight htmlH6 ctermfg=110 guifg=#81A1C1
+  highlight mkdHeading ctermfg=110 guifg=#81A1C1
+  highlight Title cterm=bold ctermfg=110 gui=bold guifg=#81A1C1
+
+  highlight mkdCode          ctermfg=131 guifg=#BF616A
+  highlight mkdCodeStart     ctermfg=131 guifg=#BF616A
+  highlight mkdCodeEnd       ctermfg=131 guifg=#BF616A
+  highlight mkdCodeDelimiter ctermfg=131 guifg=#BF616A
+  highlight mkdString        ctermfg=131 guifg=#BF616A
+
+  " vim-markdown routes emphasis through the *html* groups, not mkdItalic/mkdBold
+  highlight htmlItalic cterm=bold,italic ctermfg=222 gui=bold,italic guifg=#EBCB8B
+  highlight htmlBold   cterm=bold ctermfg=255 gui=bold guifg=#ECEFF4
+  highlight htmlBoldItalic cterm=bold,italic ctermfg=222 gui=bold,italic guifg=#EBCB8B
+  highlight mkdItalic  cterm=bold,italic ctermfg=222 gui=bold,italic guifg=#EBCB8B
+  highlight mkdBold    cterm=bold ctermfg=255 gui=bold guifg=#ECEFF4
+
+  highlight mkdLink       cterm=bold ctermfg=110 gui=bold guifg=#81A1C1
+  highlight mkdURL        ctermfg=109 gui=underline guifg=#88C0D0
+  highlight mkdInlineURL  ctermfg=109 gui=underline guifg=#88C0D0
+  highlight mkdListItem   ctermfg=110 guifg=#81A1C1
+  highlight mkdRule       ctermfg=103 guifg=#4C566A
+  highlight mkdBlockquote ctermfg=103 guifg=#4C566A
+
+  " Built-in markdown syntax, for when vim-markdown is not loaded
+  highlight link markdownH1 htmlH1
+  highlight link markdownH2 htmlH2
+  highlight link markdownH3 htmlH3
+  highlight link markdownH4 htmlH4
+  highlight link markdownH5 htmlH5
+  highlight link markdownH6 htmlH6
+  highlight link markdownCode          mkdCode
+  highlight link markdownCodeBlock     mkdCode
+  highlight link markdownCodeDelimiter mkdCode
+  highlight link markdownItalic        mkdItalic
+  highlight link markdownBold          mkdBold
+  highlight link markdownUrl           mkdURL
+  highlight link markdownLinkText      mkdLink
+  highlight link markdownListMarker    mkdListItem
+  highlight link markdownBlockquote    mkdBlockquote
+  highlight link markdownRule          mkdRule
+endfunction
+
 augroup NordSalmonMarkdown
   autocmd!
-  autocmd ColorScheme,VimEnter * highlight markdownH1 cterm=bold ctermfg=110 gui=bold guifg=#81A1C1
-  autocmd ColorScheme,VimEnter * highlight markdownH2 cterm=bold ctermfg=110 gui=bold guifg=#81A1C1
-  autocmd ColorScheme,VimEnter * highlight markdownH3 cterm=bold ctermfg=110 gui=bold guifg=#81A1C1
-  autocmd ColorScheme,VimEnter * highlight markdownH4 ctermfg=110 guifg=#81A1C1
-  autocmd ColorScheme,VimEnter * highlight markdownH5 ctermfg=110 guifg=#81A1C1
-  autocmd ColorScheme,VimEnter * highlight markdownH6 ctermfg=110 guifg=#81A1C1
-  autocmd ColorScheme,VimEnter * highlight link markdownHeadingDelimiter markdownH1
-  autocmd ColorScheme,VimEnter * highlight markdownCode          ctermfg=131 guifg=#BF616A
-  autocmd ColorScheme,VimEnter * highlight markdownCodeBlock     ctermfg=131 guifg=#BF616A
-  autocmd ColorScheme,VimEnter * highlight link markdownCodeDelimiter markdownCode
-  autocmd ColorScheme,VimEnter * highlight markdownUrl           ctermfg=109 gui=underline guifg=#88C0D0
-  autocmd ColorScheme,VimEnter * highlight markdownLinkText      cterm=bold ctermfg=110 gui=bold guifg=#81A1C1
-  autocmd ColorScheme,VimEnter * highlight markdownItalic        cterm=italic ctermfg=222 gui=italic guifg=#EBCB8B
-  autocmd ColorScheme,VimEnter * highlight markdownBold          cterm=bold ctermfg=255 gui=bold guifg=#ECEFF4
-  autocmd ColorScheme,VimEnter * highlight markdownBlockquote    ctermfg=103 guifg=#4C566A
-  autocmd ColorScheme,VimEnter * highlight markdownListMarker    ctermfg=110 guifg=#81A1C1
-  autocmd ColorScheme,VimEnter * highlight markdownRule          ctermfg=103 guifg=#4C566A
+  autocmd ColorScheme,VimEnter * call s:NordSalmonMarkdown()
+  autocmd Syntax markdown call s:NordSalmonMarkdown()
 augroup END
+call s:NordSalmonMarkdown()
 
 " I like it when vim wraps the lines in .md files
 set linebreak

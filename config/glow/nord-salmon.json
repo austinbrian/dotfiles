@@ -52,7 +52,7 @@
 
   "text": {},
   "strikethrough": { "crossed_out": true, "color": "#4C566A" },
-  "emph": { "color": "#EBCB8B", "italic": true },
+  "emph": { "color": "#EBCB8B", "italic": true, "bold": true },
   "strong": { "color": "#ECEFF4", "bold": true },
   "hr": { "color": "#4C566A", "format": "\n--------\n" },
 

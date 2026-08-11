@@ -25,6 +25,13 @@ theme :
 	mkdir -p ~/.config/bat
 	ln -sfn ~/dotfiles/config/bat/themes ~/.config/bat/themes
 	bat cache --build
+	mkdir -p ~/.vim/after/syntax ~/.vim/spell
+	ln -sf ~/dotfiles/config/vim/after/syntax/markdown.vim ~/.vim/after/syntax/markdown.vim
+	ln -sf ~/dotfiles/config/vim/spell/en.utf-8.add ~/.vim/spell/en.utf-8.add
+	@# Compile the word list. Vim regenerates lazily when the .add is newer than
+	@# the .spl, but doing it here means the first markdown buffer is already right.
+	rm -f ~/.vim/spell/en.utf-8.add.spl
+	vim -X -N -u NONE -es -c 'silent! mkspell! ~/.vim/spell/en.utf-8.add' -c 'qa!' </dev/null || true
 	@echo 'Installed. Verify: bat --list-themes | grep "Nord Salmon"'
 
 tmux :

@@ -494,6 +494,8 @@ References
         <string>markup.bold</string>
         <key>settings</key>
         <dict>
+          <key>foreground</key>
+          <string>#eceff4</string>
           <key>fontStyle</key>
           <string>bold</string>
         </dict>
@@ -505,8 +507,10 @@ References
         <string>markup.italic</string>
         <key>settings</key>
         <dict>
+          <key>foreground</key>
+          <string>#ebcb8b</string>
           <key>fontStyle</key>
-          <string>italic</string>
+          <string>bold italic</string>
         </dict>
       </dict>
       <dict>

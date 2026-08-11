@@ -1,0 +1,157 @@
+# Words vim's dictionary does not know but this work uses constantly.
+#
+# Shape-based false positives (ticket refs, ALLCAPS, snake_case, anything with a
+# digit, code spans, URLs, paths) are handled in after/syntax/markdown.vim, not
+# here — adding them one at a time would never converge. This file is for real
+# words: domain vocabulary, tool names, and the technical terms that are simply
+# missing from en_US.
+#
+# Add one interactively with `zg` (good) or `zw` (wrong); vim appends here and
+# recompiles the .spl automatically. Keep this file sorted-ish by section.
+#
+# NOTE: vim treats a leading '#' as a comment only in the sense that it is an
+# unlikely word; lines here are still loaded. That is harmless.
+
+# --- reinsurance / actuarial ---
+actuarial
+attachment
+bordereau
+bordereaux
+casualty
+cedent
+cedents
+ceding
+cession
+cessions
+collateralized
+deductible
+excess-of-loss
+fronting
+inuring
+novation
+novations
+occurrence
+paid-to-date
+proportional
+quota-share
+reinsurance
+reinsurer
+reinsurers
+retrocession
+subrogation
+treaty
+triangle
+triangles
+ultimate
+underwriter
+underwriting
+unearned
+
+# --- programme / counterparty names in regular use ---
+AmWins
+AmWINS
+Bermuda
+Cardigan
+Cornerstone
+Fermat
+Hadron
+Korra
+Ledgebrook
+Pronto
+Sevanta
+StonePoint
+Swyfft
+Trinity
+
+# --- engineering ---
+API
+APIs
+async
+auth
+backfill
+backfilled
+boolean
+changelog
+codec
+config
+configs
+dataclass
+dedupe
+deduplicate
+dev
+enum
+enums
+env
+frontend
+backend
+idempotent
+init
+jsonb
+lint
+linter
+localhost
+lookup
+middleware
+monorepo
+namespace
+nullable
+observability
+parquet
+plugin
+plugins
+pre-flight
+preprocessor
+prod
+py
+rebase
+rebased
+regex
+repo
+repos
+runtime
+schema
+schemas
+serialize
+serialized
+stdout
+stderr
+subagent
+subagents
+symlink
+symlinked
+timestamp
+timestamps
+tooling
+truthy
+falsy
+typecheck
+upsert
+validator
+webhook
+workflow
+workflows
+worktree
+worktrees
+
+# --- tools and services ---
+Anthropic
+bat
+Claude
+Clerk
+Databricks
+Docker
+Drizzle
+GitHub
+glamour
+glow
+Grafana
+Linear
+Postgres
+PostgreSQL
+Railway
+Redis
+Sentry
+Supabase
+tmux
+Vercel
+zsh
