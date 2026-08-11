@@ -11,7 +11,7 @@
     "  nord1  #3B4252  raised bg   nord9  #81A1C1  blue / headings",
     "  nord3  #4C566A  muted       nord11 #BF616A  salmon / code",
     "  nord4  #D8DEE9  fg          nord13 #EBCB8B  yellow / emphasis",
-    "  nord6  #ECEFF4  bright fg   nord14 #A3BE8C  green / strings",
+    "  nord6  #ECEFF4  bright fg   nord12 #D08770  orange / strong",
     "                              nord15 #B48EAD  purple / numbers"
   ],
 
@@ -53,7 +53,7 @@
   "text": {},
   "strikethrough": { "crossed_out": true, "color": "#4C566A" },
   "emph": { "color": "#EBCB8B", "italic": true, "bold": true },
-  "strong": { "color": "#ECEFF4", "bold": true },
+  "strong": { "color": "#D08770", "bold": true },
   "hr": { "color": "#4C566A", "format": "\n--------\n" },
 
   "item": { "block_prefix": "• ", "color": "#81A1C1" },
@@ -103,7 +103,7 @@
       "generic_deleted": { "color": "#BF616A" },
       "generic_inserted": { "color": "#A3BE8C" },
       "generic_emph": { "color": "#EBCB8B", "italic": true },
-      "generic_strong": { "color": "#ECEFF4", "bold": true },
+      "generic_strong": { "color": "#D08770", "bold": true },
       "generic_subheading": { "color": "#81A1C1" },
       "background": { "background_color": "#2E3440" }
     }

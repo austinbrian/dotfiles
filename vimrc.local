@@ -187,12 +187,14 @@ function! s:NordSalmonMarkdown() abort
   highlight mkdCodeDelimiter ctermfg=131 guifg=#BF616A
   highlight mkdString        ctermfg=131 guifg=#BF616A
 
-  " vim-markdown routes emphasis through the *html* groups, not mkdItalic/mkdBold
+  " vim-markdown routes emphasis through the *html* groups, not mkdItalic/mkdBold.
+  " emph  = nord13 yellow  #EBCB8B  bold + italic
+  " strong= nord12 orange  #D08770  bold      (trial; revert to #ECEFF4 to mute)
   highlight htmlItalic cterm=bold,italic ctermfg=222 gui=bold,italic guifg=#EBCB8B
-  highlight htmlBold   cterm=bold ctermfg=255 gui=bold guifg=#ECEFF4
-  highlight htmlBoldItalic cterm=bold,italic ctermfg=222 gui=bold,italic guifg=#EBCB8B
+  highlight htmlBold   cterm=bold ctermfg=173 gui=bold guifg=#D08770
+  highlight htmlBoldItalic cterm=bold,italic ctermfg=173 gui=bold,italic guifg=#D08770
   highlight mkdItalic  cterm=bold,italic ctermfg=222 gui=bold,italic guifg=#EBCB8B
-  highlight mkdBold    cterm=bold ctermfg=255 gui=bold guifg=#ECEFF4
+  highlight mkdBold    cterm=bold ctermfg=173 gui=bold guifg=#D08770
 
   highlight mkdLink       cterm=bold ctermfg=110 gui=bold guifg=#81A1C1
   highlight mkdURL        ctermfg=109 gui=underline guifg=#88C0D0

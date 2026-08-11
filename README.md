@@ -100,6 +100,12 @@ Two deliberate departures from canonical Nord, applied identically everywhere:
 | --- | --- | --- |
 | headings | `#88C0D0` nord8 frost cyan | `#81A1C1` nord9 blue |
 | inline code | `#8FBCBB` nord7 | `#BF616A` nord11 salmon |
+| `*emph*` | plain italic | `#EBCB8B` nord13 yellow, **bold** + italic |
+| `**strong**` | plain bold | `#D08770` nord12 orange, bold — *on trial* |
+
+To mute strong again, set it back to `#ECEFF4` in all three places: `markup.bold`
+in the tmTheme, `strong` (and `generic_strong`) in the glow JSON, and
+`htmlBold` / `htmlBoldItalic` / `mkdBold` in `vimrc.local`.
 
 ### Where each surface gets it
 | surface | mechanism | file |

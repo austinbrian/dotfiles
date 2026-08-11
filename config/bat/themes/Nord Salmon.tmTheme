@@ -495,7 +495,7 @@ References
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#eceff4</string>
+          <string>#d08770</string>
           <key>fontStyle</key>
           <string>bold</string>
         </dict>
