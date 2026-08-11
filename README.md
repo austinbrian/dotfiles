@@ -163,6 +163,22 @@ unless you re-link it — hence the `hi link` rules in that file. And the compil
 `.spl` is what vim reads; `make theme` rebuilds it, otherwise vim only
 regenerates when it notices the `.add` is newer.
 
+### Markdown tables
+Vim cannot *render* a table — the ceiling is keeping the pipes aligned. Real
+rendering (box borders, concealed markup) exists only as `render-markdown.nvim`,
+which is Neovim-only. Two alignment paths, both installed:
+
+* `:TableFormat` — vim-markdown, aligns the table under the cursor on demand.
+* `,tm` — toggle `vim-table-mode`, which realigns live as you type. `,tr`
+  realigns once without enabling the mode.
+
+Table mode is **not** auto-enabled on `FileType markdown`: while active it remaps
+`|`, which is disruptive in prose. Corners are configured as `|` rather than its
+default `+`, because a `+` separator row is not valid markdown and glow/GitHub
+will refuse to render the table.
+
+For reading, `dlog` already renders tables properly — vim to edit, `dlog` to read.
+
 ### Verifying
 Colour is stripped when output is not a TTY, and forcing it with
 `CLICOLOR_FORCE=1` downsamples to ANSI-16, which is misleading. Use a real pty:

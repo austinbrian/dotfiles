@@ -229,6 +229,28 @@ augroup NordSalmonMarkdown
 augroup END
 call s:NordSalmonMarkdown()
 
+" Markdown tables — dhruvasagar/vim-table-mode
+"
+" Vim cannot *render* a table; the ceiling is keeping the pipes aligned. Two
+" ways to get there:
+"   :TableFormat   from vim-markdown, aligns the table under the cursor on
+"                  demand (backed by tabular)
+"   table mode     re-aligns live as you type
+"
+" Corners are '|' rather than table-mode's default '+', so the separator row
+" stays GitHub-flavoured (|---|---|). A '+' corner is not valid markdown and
+" glow/GitHub will refuse to render the table.
+let g:table_mode_corner = '|'
+let g:table_mode_corner_corner = '|'
+let g:table_mode_header_fillchar = '-'
+
+" Deliberately not auto-enabled on FileType markdown: while active, table mode
+" remaps `|` to trigger realignment, which is disruptive when writing prose that
+" happens to contain a pipe. Toggle per buffer instead (leader is ,):
+"   ,tm   toggle table mode
+"   ,tr   realign the current table without enabling the mode
+"   :TableFormat  one-shot align via vim-markdown
+
 " I like it when vim wraps the lines in .md files
 set linebreak
 

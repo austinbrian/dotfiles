@@ -15,8 +15,14 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-path'
 
 "Added in new markdown-friendly plugins
+" tabular backs vim-markdown's :TableFormat — keep it above vim-markdown.
 Plug 'godlygeek/tabular'
-Plug 'plasticboy/vim-markdown'
+" preservim/, not plasticboy/: the original repo was renamed and every fix since
+" 2022 has landed under the new name. Same plugin, same groups (htmlH1, mkdCode).
+Plug 'preservim/vim-markdown'
+" Re-aligns markdown tables as you type, rather than on demand via :TableFormat.
+" \tm toggles it; see the Markdown tables section of vimrc.local.
+Plug 'dhruvasagar/vim-table-mode'
 
 " Updated python syntax
 Plug 'vim-python/python-syntax'
