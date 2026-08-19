@@ -245,6 +245,7 @@ daylog() {
 dlog()  { local p; p=$(daylog-path "$@") || return 1; glow -s "$GLAMOUR_STYLE" -p -w 120 "$p" }
 dedit() { local p; p=$(daylog-path "$@") || return 1; "${VISUAL:-${EDITOR:-vim}}" "$p" }
 
+alias glow="glow -s "$GLAMOUR_STYLE" -p -w 120"
 
 # opencode
 export PATH=/Users/austinbrian/.opencode/bin:$PATH
