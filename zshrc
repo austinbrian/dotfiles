@@ -143,8 +143,9 @@ export GLAMOUR_STYLE="$HOME/dotfiles/config/glow/nord-salmon.json"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
-# source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Homebrew lives in /opt/homebrew on Apple Silicon and /usr/local on Intel (mbp)
+if [[ -x /opt/homebrew/bin/brew ]]; then BREW_PREFIX=/opt/homebrew; else BREW_PREFIX=/usr/local; fi
+[[ -r $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source $BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 
 # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
@@ -163,7 +164,7 @@ export PATH=$PATH:"/Applications/Visual Studio Code.app/Contents/Resources/app/b
 setopt nosharehistory
 
 # Add postgresql
-export PATH="/opt/homebrew/opt/postgresql@12/bin:$PATH"
+export PATH="$BREW_PREFIX/opt/postgresql@12/bin:$PATH"
 
 # # Add pyenv
 # export PYENV_ROOT="$HOME/.pyenv"
@@ -179,13 +180,13 @@ export PATH="/opt/homebrew/opt/postgresql@12/bin:$PATH"
 complete -C '$(which aws_completer)' aws
 
 # add libpq
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$BREW_PREFIX/opt/libpq/bin:$PATH"
 
 # Only source bashrc to avoid duplicate loading
 source ~/.bashrc
 # add LDENV
 #
-export LDFLAGS="-I/opt/homebrew/opt/openssl/include -L/opt/homebrew/opt/openssl/lib"
+export LDFLAGS="-I$BREW_PREFIX/opt/openssl/include -L$BREW_PREFIX/opt/openssl/lib"
 
 # >>> VSCode venv deactivate hook >>>
 # source ~/.vscode-python/deactivate if file exists
