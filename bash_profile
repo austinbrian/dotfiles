@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/austinbrian/.docker/bin"
+# End of Docker Desktop section.
+
 # Git branch in prompt.
 
 parse_git_branch() {
@@ -42,4 +46,5 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
-. "$HOME/.local/bin/env"
+[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

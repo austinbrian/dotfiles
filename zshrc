@@ -250,3 +250,6 @@ alias glow="glow -s "$GLAMOUR_STYLE" -p -w 120"
 
 # opencode
 export PATH=/Users/austinbrian/.opencode/bin:$PATH
+
+export EDITOR=vim
+export VISUAL=vim
