@@ -1,0 +1,6 @@
+# Personal identity for everything under ~/dev, pulled in by an includeIf in
+# ~/.gitconfig. The global email stays the work address, so ~/ldgr is unaffected;
+# without this a new repo in ~/dev silently commits as work.
+[user]
+	name = Brian Austin
+	email = austin.brian@gmail.com

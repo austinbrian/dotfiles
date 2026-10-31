@@ -34,6 +34,14 @@ theme :
 	vim -X -N -u NONE -es -c 'silent! mkspell! ~/.vim/spell/en.utf-8.add' -c 'qa!' </dev/null || true
 	@echo 'Installed. Verify: bat --list-themes | grep "Nord Salmon"'
 
+# Personal git identity for ~/dev. ~/.gitconfig itself is not managed here (it
+# holds the work identity), so this adds the includeIf to it rather than
+# replacing it; `git config --get-all` keeps the add idempotent.
+git :
+	ln -sf ~/dotfiles/gitconfig-personal ~/.gitconfig-personal
+	git config --global --get-all includeIf.gitdir:~/dev/.path >/dev/null || \
+		git config --global --add includeIf.gitdir:~/dev/.path ~/.gitconfig-personal
+
 tmux :
 	ln -sf ~/dotfiles/tmux.conf ~/.tmux.conf
 	ln -sf ~/dotfiles/tmux.conf.local ~/.tmux.conf.local
@@ -51,4 +59,5 @@ setup:
 	make tmux
 	make vim
 	make theme
+	make git
 
