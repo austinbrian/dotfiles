@@ -38,4 +38,12 @@ k=kubectl
 # alias showports='lsof -iTCP -sTCP:LISTEN -n -P | awk 'NR>1{print $9, $1, $2}'|sed 's/.*://'|while read port process pid; do echo "Port $port:$(ps -p $pid -o command= | sed 's/^-//')(PID:$pid)";done|sort -n'
 
 alias cc="CLAUDE_CODE_NO_FLICKER=1 claude --dangerously-skip-permissions --chrome"
-alias clawstin="ssh -v clawstin@clawstin-mini.local"
+unalias clawstin 2>/dev/null
+clawstin() {
+  local host=bda-mini.tail4880db.ts.net
+  if [ "$1" = "--desktop" ]; then
+    open "vnc://$host"
+  else
+    ssh -v "clawstin@$host" "$@"
+  fi
+}
